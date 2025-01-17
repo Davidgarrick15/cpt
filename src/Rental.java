@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+// i got the imports from chat gbt
 
 class Rental {
     public int rentalId;
@@ -7,6 +8,7 @@ class Rental {
     public Car rentedCar; 
     public LocalDate startDate;
     public LocalDate endDate;
+    //local date is from chat gbt
     public double totalCost;
 
 
@@ -22,6 +24,12 @@ class Rental {
         long rentalDuration =  ChronoUnit.DAYS.between(startDate, endDate);
         // i got the chronounit.dyas code from chat gbt
         return rentalDuration * rentedCar.getPricePerDay();
+    }
+    public void displayRentalDetails() {
+        System.out.println("Rental ID: " + rentalId);
+        System.out.println("Renter: " + renter.getName());
+        System.out.println("Car: " + rentedCar.getMake() + " " + rentedCar.getModel());
+        System.out.println("Total Cost: $" + totalCost);
     }
 
     
