@@ -1,3 +1,8 @@
+/**
+ * author:david
+ * date:01/19/2024
+ * app
+ */
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -20,13 +25,12 @@ public class App {
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume the newline.
-
+            scanner.nextLine();  
             switch (choice) {
                 case 1:  // Add a Car.
                     System.out.print("Enter Car ID: ");
                     int carId = scanner.nextInt();
-                    scanner.nextLine();  // Consume the newline.
+                    scanner.nextLine();  
                     System.out.print("Enter Make: ");
                     String make = scanner.nextLine();
                     System.out.print("Enter Model: ");
@@ -50,15 +54,15 @@ public class App {
                 case 4:  // Rent a Car.
                     System.out.print("Enter your User ID: ");
                     int userId = scanner.nextInt();
-                    scanner.nextLine();  // Consume the newline.
+                    scanner.nextLine();  // scan the newline.
                     System.out.print("Enter your Name: ");
                     String userName = scanner.nextLine();
                     User user = new User(userId, userName, "dummyemail");
                     System.out.print("Enter Car ID to rent: ");
                     int rentCarId = scanner.nextInt();
                     Car carToRent = inventory.getCarById(rentCarId);  // Assume method to get car by ID exists.
-                    if (carToRent != null && carToRent.isAvailable()) {
-                        carToRent.setAvailable(false);
+                    if (carToRent != null && carToRent.getIsAvailable()) {
+                        carToRent.setIsAvailable(false);
                         Rental rental = new Rental(rentals.size() + 1, user, carToRent, LocalDate.now(), null, 0);
                         rentals.add(rental);
                         System.out.println("Car rented successfully.");
@@ -68,17 +72,15 @@ public class App {
                     break;
 
                 case 5:  // Return a Car.
-                    System.out.print("Enter Rental ID to return: ");
-                    int rentalId = scanner.nextInt();
-                    Rental rentalToReturn = rentals.stream().filter(r -> r.getRentalId() == rentalId).findFirst().orElse(null);
-                    if (rentalToReturn != null) {
-                        rentalToReturn.setEndDate(LocalDate.now());
-                        double cost = rentalToReturn.calculateRentalCost();
-                        rentalToReturn.getRentedCar().setAvailable(true);
-                        rentals.remove(rentalToReturn);
-                        System.out.println("Car returned successfully. Total cost: $" + cost);
+                System.out.print("Enter rental ID to return: ");
+                int rentalId = scanner.nextInt();
+                Rental rentalToReturn = RentalSystem.getRentalById(rentalId); // Use method from RentalSystem
+                if (rentalToReturn != null) {
+                    rentalToReturn.setEndDate(LocalDate.now());
+                    System.out.println("Car returned successfully. Rental summary:");
+                    System.out.println(rentalToReturn); // Assuming Rental class has a toString method.
                     } else {
-                        System.out.println("Rental ID not found.");
+                        System.out.println("Rental with ID " + rentalId + " not found.");
                     }
                     break;
 

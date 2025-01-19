@@ -1,3 +1,8 @@
+/**
+ * author:david
+ * date:01/19/2024
+ * inventory
+ */
 public class Inventory {
     public Car[] carList;
     public int carCount;  // Keeps track of the number of cars in the array.
@@ -54,6 +59,27 @@ public class Inventory {
         }
         if (!found) {
             System.out.println("No cars found below the price of $" + maxPrice);
+        }
+    }
+    public Car getCarById(int carId) {
+        for (int i = 0; i < carCount; i++) {
+            if (carList[i].carId == carId) {
+                return carList[i];
+            }
+        }
+        return null;  // Return null if no car is found.
+    }
+    public void searchByMake(String make) {
+        boolean found = false; //search for car by make
+        System.out.println("Cars matching make '" + make + "':");
+        for (Car car : carList) {
+            if (car != null && car.getMake().equalsIgnoreCase(make)) {
+                System.out.println(car.getMake() + " " + car.getModel() + " - $" + car.getPricePerDay() + " per day");
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No cars found with make: " + make);
         }
     }
 }

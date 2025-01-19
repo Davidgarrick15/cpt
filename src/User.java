@@ -1,10 +1,14 @@
+/**
+ * author:david
+ * date:01/19/2024
+ * user
+ */
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class User {
     public int userId;
-    public String name;
-    public String email;
+    public String name;//user name 
+    public String email;// user email
     
     public User(int userId, String name,String email) {
         this.userId = userId;
@@ -12,7 +16,7 @@ public class User {
         this.email = email;
     }
     public String getName() {
-        return name;
+        return name;//name of the user
     }
 
 }
